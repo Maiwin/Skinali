@@ -15,6 +15,35 @@ $(window).on('load', function () {
     $('.menu').toggleClass('menu_active');
   });
 
+  //слайдер с отзывами 
+  $('.reviews-slider').slick({
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    dots: true,
+    responsive: [{
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 760,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
+
   // Настройка select 
   $('.select_checked').on('click', function () {
     $('.select__dropdown').toggleClass('select__dropdown_open');
@@ -29,7 +58,9 @@ $(window).on('load', function () {
   // маска на форму для ввода номера
   $("a[href^='#']").click(function () {
     var _href = $(this).attr("href");
-    $("html, body").animate({ scrollTop: $(_href).offset().top - 130 + "px" });
+    $("html, body").animate({
+      scrollTop: $(_href).offset().top - 130 + "px"
+    });
     return false;
   });
   $('input[type="tel"]').mask("+7 (999) 999-99-99");
@@ -37,7 +68,7 @@ $(window).on('load', function () {
   //показывать карту когда пользователь докрудил до блока reviews для снижения нагрузки 
   var reviews = $('.reviews');
   var reviewsTop = reviews.offset().top;
-  $(window).bind('scroll', function() {
+  $(window).bind('scroll', function () {
     var windowTop = $(this).scrollTop();
     if (windowTop > reviewsTop) {
       $('#map').html('<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6b7ebf47e0a66f9b2d92a91392ef8d4941503584b0e467af46385a71fd6664c9&amp;width=100%25&amp;height=410&amp;lang=ru_RU&amp;scroll=false"></script>')
@@ -45,4 +76,3 @@ $(window).on('load', function () {
     }
   });
 });
-
